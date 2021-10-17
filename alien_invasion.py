@@ -59,6 +59,7 @@ class AlienInvasion:
             # 删除现有的所有子弹，并创建一群新的外星人。
             self.bullets.empty()
             self._create_fleet()
+            self.settings.increase_speed()
 
     def _update_aliens(self):
         """
@@ -136,6 +137,7 @@ class AlienInvasion:
         button_clicked = self.play_button.rect.collidepoint(mouse_pos)
 
         if button_clicked and not self.stats.game_active:
+            self.settings.initialize_dynamic_settings()
             self._start_game()
             
 
