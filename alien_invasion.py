@@ -96,6 +96,7 @@ class AlienInvasion:
         if self.stats.ships_left > 0:
             # 将ships_left减1
             self.stats.ships_left -= 1
+            self.sb.prep_ships()
 
             # 清空余下的外星人和子弹。
             self.aliens.empty()
@@ -154,6 +155,7 @@ class AlienInvasion:
             self._start_game()
             self.sb.prep_score()
             self.sb.prep_level()
+            self.sb.prep_ship()
             
 
     def _start_game(self):
@@ -211,7 +213,7 @@ class AlienInvasion:
         # 计算屏幕容纳多少行外星人。
         ship_height = self.ship.rect.height
         available_space_y = (self.settings.screen_height -
-                             (3 * alien_height) - ship_height)
+                             (3 * alien_height) - 1 * ship_height)
         number__rows = available_space_y // (2 * alien_height)
 
         # 创建一行外星人。
@@ -225,7 +227,8 @@ class AlienInvasion:
         alien_width = alien.rect.width
         alien.x = alien_width + 2 * alien_width * alien_number
         alien.rect.x = alien.x
-        alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number
+        alien.rect.y = 50
+        alien.rect.y += alien.rect.height + 1.6 * alien.rect.height * row_number
         self.aliens.add(alien)
 
     def _check_fleet_edges(self):
