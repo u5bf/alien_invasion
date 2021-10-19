@@ -69,6 +69,7 @@ class Scoreboard:
         """检查是否诞生了新的最高分。"""
         if self.stats.score > self.stats.high_score:
             self.stats.high_score = self.stats.score
+            self.stats._write_high_score(self.stats.high_score)
             self.prep_high_score()
 
     def show_score(self):
